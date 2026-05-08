@@ -234,6 +234,8 @@ do
   vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
   vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+  vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'NeoTree [E]xplorer toggle' })
+
   -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
   -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
   -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
@@ -692,7 +694,15 @@ do
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
   local servers = {
-    -- clangd = {},
+    clangd = {
+      cmd = {
+        'clangd',
+        '--background-index',
+        '--compile-commands-dir=build',
+        '--header-insertion=iwyu',
+        '--query-driver=**/*-elf-gcc,**/*-elf-g++',
+      },
+    },
     -- gopls = {},
     -- pyright = {},
     -- rust_analyzer = {},
